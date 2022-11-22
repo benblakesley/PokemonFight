@@ -9,7 +9,13 @@ export class PlayAgain extends React.Component{
 
     render(){
         return (
-            <button onClick={this.handleClick}>Play Again</button>
+            <div className="container">
+                <div className="row">
+                    <div className="col text-center my-5">
+            <button type="button" className="btn btn-danger" onClick={this.handleClick}>Play Again</button>
+                     </div>
+                 </div>
+            </div>
         )
     }
 

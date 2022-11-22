@@ -4,7 +4,7 @@ export class Score extends React.Component{
 
     render(){
         return(
-            <p style={{textAlign:"center"}}>Score: {this.props.score}</p>
+            <p className="text-center">Score: {this.props.score}</p>
         )
     }
 }
