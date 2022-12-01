@@ -33,7 +33,7 @@ export class Game extends React.Component{
         fetch(endpointOne).then(response=>{
             return response.json();
         }).then(jsonResponse=>{
-            console.log(jsonResponse.stats[1].base_stat)
+            console.log(jsonResponse.stats[1].base_stat);
             this.setState({pokemonOne:{name:jsonResponse.name, spriteSrc:jsonResponse.sprites.front_default, attack:jsonResponse.stats[1].base_stat}});
            
         })

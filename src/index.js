@@ -10,11 +10,13 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { Game } from './Game';
+import { Login } from './Login';
+import {App} from './App'
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Game/>)
+root.render(<App/>)
 
 
 
