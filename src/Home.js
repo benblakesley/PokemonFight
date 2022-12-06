@@ -4,13 +4,10 @@ import {Link} from "react-router-dom";
 
 
 
-export class Home extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
-    render(){
-        return(
+export const Home = (props) => {
+ 
+   
+    return(
             <div>
                 <Link to="login">Login</Link>
                 <Link to="signup">Sign Up</Link>
@@ -18,4 +15,3 @@ export class Home extends React.Component{
         );
     }
     
-}

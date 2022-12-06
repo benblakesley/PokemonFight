@@ -1,46 +1,39 @@
 import React from "react";
 import {Link, Navigate } from "react-router-dom";
+import { useState } from "react";
 
-export class SignUp extends React.Component{
+export const SignUp = (props) => {
+
+const [username, setUsername] = useState("");
+const [password, setPassword] = useState("");
 
 
-
-constructor(props){
-    super(props);
-    this.state = {
-        username: "",
-        password: ""
-    }
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleSignUp = this.handleSignUp.bind(this);
-    this.usernameTaken = this.usernameTaken.bind(this);
+const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
 }
 
-handleUsernameChange(event){
-    this.setState({username: event.target.value});
+const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
 }
 
-handlePasswordChange(event){
-    this.setState({password: event.target.value});
-}
-
-handleSignUp(){
-   this.usernameTaken().then(
+const handleSignUp = () => {
+   usernameTaken().then(
        response=>{
            if(response){
+               console.log("username taken");
                // functionality to prevent signup and tell user username is taken
            }
            else{
                //functionality to create user, begin session, and redirect to game page
-            this.createUser();
-            <Navigate to="../Game"/>
+            createUser();
+            
+            //nagigate to game
         }
        }
    )
 }
 
-createUser = async() =>{
+const createUser = async() =>{
     
     const endpoint="http://localhost:8080/create";
     try{
@@ -51,8 +44,8 @@ createUser = async() =>{
                 'Content-Type': 'application/json'
               },
             body: JSON.stringify(
-                {username: this.state.username,
-                 password: this.state.password})
+                {username: username,
+                 password: password})
         });
     }
     catch(error){
@@ -60,10 +53,9 @@ createUser = async() =>{
     }
 }
 
-usernameTaken = async () => {
+const usernameTaken = async () => {
     
     const baseUrl="http://localhost:8080/";
-    const username = this.state.username;
     const endpoint = `${baseUrl}${username}`;
     try{
         const response = await fetch(endpoint);
@@ -83,7 +75,7 @@ usernameTaken = async () => {
 }
 
 
-render(){
+
  return(
     <div className="Auth-form-container">
         <form className="Auth-form" 
@@ -101,7 +93,7 @@ render(){
                         className="form-control mt-1"
                         placeholder="WelshBen"
                         required
-                        onChange={this.handleUsernameChange}
+                        onChange={handleUsernameChange}
 
                     />
                 </div>
@@ -112,11 +104,11 @@ render(){
                         className="form-control mt-1"
                         placeholder="Password"
                         required
-                        onChange={this.handlePasswordChange}
+                        onChange={handlePasswordChange}
                         />
                 </div>
                 <div className="d-grid gap-2 mt-3">
-                    <button onClick={this.handleSignUp} type="button" className="btn btn-primary">
+                    <button onClick={handleSignUp} type="button" className="btn btn-primary">
                      Submit
                     </button>
                 </div>
@@ -126,4 +118,4 @@ render(){
  );
  }
 
- }
+ 

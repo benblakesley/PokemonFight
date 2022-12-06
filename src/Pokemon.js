@@ -1,11 +1,10 @@
 import React from "react";
 
-export class Pokemon extends React.Component{
+export const Pokemon =(props) => {
 
 
-    render(){
-        return(
-            
+
+    return(
                 <div className="container my-5">
                     <div className="row">
                         <div className="col">
@@ -16,15 +15,5 @@ export class Pokemon extends React.Component{
                         </div>
                     </div>
                 </div>
-        
-
-
-
-
-            // <div >
-            //     <img src={this.props.pokeSpriteSrc}/>
-            //     <p>{this.props.pokeName} </p>
-            // </div>
         );
     }
-}

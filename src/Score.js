@@ -1,10 +1,8 @@
 import React from "react";
 
-export class Score extends React.Component{
+export const Score = (props) => {
 
-    render(){
         return(
             <p className="text-center">Score: {this.props.score}</p>
         )
-    }
 }

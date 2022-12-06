@@ -7,19 +7,23 @@ import { Login } from './Login';
 import { SignUp} from './SignUp';
 import { Game } from './Game';
 import { Home } from './Home'
+import { ProtectedRoute } from './ProtectedRoute';
 
 
-export class App extends React.Component{
-  render(){
-    return(
-      <BrowserRouter>
+export const App = () => {
+
+return(
+  <BrowserRouter>
     <Routes>
       <Route path='/' element={<Home/>}></Route>
       <Route path='login' element={<Login/>}></Route>
       <Route path='signup' element={<SignUp/>}></Route>
-      <Route path='game' element={<Game/>}></Route>
+      <Route path='game' element={
+      <ProtectedRoute>
+          <Game/>
+      </ProtectedRoute>}>
+      </Route>
     </Routes>
    </BrowserRouter>
     );
-  }
 }

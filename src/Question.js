@@ -1,9 +1,9 @@
 import React from "react";
 
-export class Question extends React.Component{
+export const Question = () => {
 
-    render(){
-        return(
+
+ return(
             <div>
                 <div className="container">
                  <div className="row">
@@ -14,12 +14,5 @@ export class Question extends React.Component{
                     </div>
                  </div>
              </div>
-            
-
-            // <div >
-            // <h1>Pokemon Fight</h1>
-            // <p>Based on the basic attack stat, which pokemon is stronger?</p>
-            // </div>
         );
-    }
 }

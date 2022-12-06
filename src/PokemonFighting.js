@@ -2,38 +2,29 @@
 import React from "react";
 import { Pokemon } from "./Pokemon";
 
-export class PokemonFighting extends React.Component{
+export const PokemonFighting = (props) => {
 
-    constructor(props){
-        super(props);
-        this.handleClickOne = this.handleClickOne.bind(this);
-        this.handleClickTwo = this.handleClickTwo.bind(this);
+    const handleClickOne = (e) => {
+            props.onPokeOneClicked();
     }
 
-    handleClickOne(e){
-            this.props.onPokeOneClicked();
+    const handleClickTwo = (e) => {
+        props.onPokeTwoClicked();
     }
 
-    handleClickTwo(e){
-        this.props.onPokeTwoClicked();
-    }
 
-   
-    render(){
-     
         return(
             <div className="container">
                 <div className="row">
                     <div className="col">
-            <div onClick={this.handleClickOne}>
-                <Pokemon pokeSpriteSrc = {this.props.pokemonOne.spriteSrc} pokeName = {this.props.pokemonOne.name}/></div>
+            <div onClick={handleClickOne}>
+                <Pokemon pokeSpriteSrc = {props.pokemonOne.spriteSrc} pokeName = {props.pokemonOne.name}/></div>
                     </div>
                     <div className="col">
-            <div onClick={this.handleClickTwo}>
-                <Pokemon pokeSpriteSrc = {this.props.pokemonTwo.spriteSrc} pokeName = {this.props.pokemonTwo.name}/></div>
+            <div onClick={handleClickTwo}>
+                <Pokemon pokeSpriteSrc = {props.pokemonTwo.spriteSrc} pokeName = {props.pokemonTwo.name}/></div>
                 </div>
             </div>
             </div>
         );
-    }
 }
