@@ -6,6 +6,8 @@ import { FinalScore } from "./FinalScore";
 import { PlayAgain } from "./PlayAgain";
 import { useState } from "react";
 import { useEffect } from "react";
+import { SignOut } from "./SignOut";
+import { getCurrentUser, getHighScore, setHighScore } from "./HelperHttpFunctions";
 
 export const Game = (props) => {
 
@@ -13,6 +15,7 @@ export const Game = (props) => {
     const [pokemonTwo, setPokemonTwo] = useState({name:"", spriteSrc:"", attack:0});
     const [score, setScore] = useState(0);
     const [gameOver, setGameOver] = useState(false);
+    const [username, setUsername] = useState("");
    
 
     const generateTwoRandomPokemon = () => {
@@ -33,12 +36,40 @@ export const Game = (props) => {
         })
 
     }
-
+    
     useEffect(()=>{
         generateTwoRandomPokemon();
     }, [])
 
-   
+    useEffect(()=>{
+        currentSessionUser();
+    }, [])
+
+    useEffect(()=>{
+        handleHighScore();
+    }, [gameOver])
+
+    const handleHighScore = ()=>{
+        getHighScore(username)
+        .then(response=>{
+            return response.json();
+        }).then(jsonResponse=>{
+            if(score > jsonResponse){
+                setHighScore(username, score);
+            }
+        }
+        );
+    }
+
+    const currentSessionUser = ()=>{
+        getCurrentUser()
+        .then(response=>{
+            return response.text();
+        }).then(textResponse=>{
+            setUsername(textResponse);
+        })
+    }
+    
   
     
 
@@ -101,6 +132,7 @@ export const Game = (props) => {
                 <div>
                 <FinalScore score={score}/>
                 <PlayAgain onClick={restartGame}/>
+                <SignOut/>
                 </div>
                );
         }

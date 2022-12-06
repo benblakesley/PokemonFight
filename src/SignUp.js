@@ -1,11 +1,17 @@
 import React from "react";
-import {Link, Navigate } from "react-router-dom";
+import {Link} from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { signIn } from "./HelperHttpFunctions";
 
 export const SignUp = (props) => {
 
+
+const navigate = useNavigate();
+
 const [username, setUsername] = useState("");
 const [password, setPassword] = useState("");
+
 
 
 const handleUsernameChange = (event) => {
@@ -18,15 +24,16 @@ const handlePasswordChange = (event) => {
 
 const handleSignUp = () => {
    usernameTaken().then(
-       response=>{
+       async(response)=>{
            if(response){
                console.log("username taken");
                // functionality to prevent signup and tell user username is taken
            }
            else{
                //functionality to create user, begin session, and redirect to game page
-            createUser();
-            
+            await createUser();
+            await signIn(username, password);
+            navigate("../Game");
             //nagigate to game
         }
        }

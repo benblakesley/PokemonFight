@@ -9,8 +9,8 @@ export const Pokemon =(props) => {
                     <div className="row">
                         <div className="col">
                         
-                             <img className="rounded mx-auto d-block" src={this.props.pokeSpriteSrc}/>
-                             <p className="text-center">{this.props.pokeName} </p>
+                             <img className="rounded mx-auto d-block" src={props.pokeSpriteSrc}/>
+                             <p className="text-center">{props.pokeName} </p>
             
                         </div>
                     </div>

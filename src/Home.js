@@ -8,9 +8,15 @@ export const Home = (props) => {
  
    
     return(
-            <div>
-                <Link to="login">Login</Link>
-                <Link to="signup">Sign Up</Link>
+            <div className="container">
+                <div className="row">
+                    <div className="col text-center">
+                        <Link to="login">Login</Link>
+                    </div>
+                    <div className="col text-center">
+                        <Link to="signup">Sign Up</Link>
+                    </div>
+                </div>
             </div>
         );
     }

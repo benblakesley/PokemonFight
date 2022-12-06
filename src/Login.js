@@ -1,13 +1,12 @@
 import React from "react";
 import { Game } from "./Game";
-import { json, Link, Navigate} from "react-router-dom";
-import {checkSessionValid} from './HelperHttpFunctions';
-import { SignOut } from "./SignOut";
+import { Link, useNavigate} from "react-router-dom";
+import {checkSessionValid, signIn} from './HelperHttpFunctions';
 import { useState } from "react";
 
 
 export const Login = (props) => {
-
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("")
 
@@ -26,45 +25,21 @@ const handleSignIn = async()=>{
            if(response){
                //sign in functionality
                
-               await signIn();
-               const isLoggedIn = await checkSessionValid().then(response=>{
-                 return response.json();
-               });
-               console.log(isLoggedIn);
+               await signIn(username, password);
+               navigate("../Game");
+               
                    
            }
            else{
                //inform user that credentials are incorrect
-               const isLoggedIn = await checkSessionValid().then(response=>{
-                return response.json();
-              });
-              console.log(isLoggedIn);
+              
                console.log("invalid credentials");
            }
        });
     }
 
 
-const signIn = async()=>{
-    const endpoint = "http://localhost:8080/login";
-    try{
-        const response = await fetch(endpoint, {
-            credentials: 'include',
-            method:'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(
-                {username: username,
-                 password: password})
-        });
-        console.log("I have signed in ")
-    }
-    catch(error){
-        console.log(error);
-    }
-}
+
 
 const validCredentials = async()=>{
     const endpoint = "http://localhost:8080/checkCredentials";
@@ -125,7 +100,6 @@ return(
               </button>
              
             </div>
-            <SignOut/>
             </div>
         </form>
      </div>
