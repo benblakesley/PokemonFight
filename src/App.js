@@ -9,13 +9,19 @@ import { Game } from './Game';
 import { Home } from './Home'
 import { MustBeLoggedIn} from './MustBeLoggedIn';
 import { MustBeLoggedOut } from './MustBeLoggedOut';
+import { LeaderboardPage } from './LeaderboardPage';
 
 export const App = () => {
 
 return(
   <BrowserRouter>
     <Routes>
-      <Route path='/' element={<Home/>}></Route>
+      
+      <Route path='/' element={
+        <MustBeLoggedOut>
+          <Home/>
+        </MustBeLoggedOut>}>
+        </Route>
 
       <Route path='login' element={
       <MustBeLoggedOut>
@@ -34,6 +40,9 @@ return(
           <Game/>
       </MustBeLoggedIn>}>
       </Route>
+      
+      <Route path = 'leaderboard' element = {<LeaderboardPage/>}></Route>
+
 
     </Routes>
    </BrowserRouter>

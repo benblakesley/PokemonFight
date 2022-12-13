@@ -25,19 +25,33 @@ const handlePasswordChange = (event) => {
 const handleSignUp = () => {
    usernameTaken().then(
        async(response)=>{
+
+            if(usernameOrPasswordEmpty()){
+                console.log("Please enter username and password")
+            }
+            else{
            if(response){
                console.log("username taken");
                // functionality to prevent signup and tell user username is taken
            }
            else{
                //functionality to create user, begin session, and redirect to game page
+            
             await createUser();
             await signIn(username, password);
             navigate("../Game");
-            //nagigate to game
+            //navigate to game
         }
+    }
        }
    )
+}
+
+const usernameOrPasswordEmpty = ()=>{
+    if(username=="" || password==""){
+        return true;
+    }
+    return false;
 }
 
 const createUser = async() =>{

@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { SignOut } from "./SignOut";
 import { getCurrentUser, getHighScore, setHighScore } from "./HelperHttpFunctions";
+import { GoToLeaderboard } from "./GoToLeaderboard";
 
 export const Game = (props) => {
 
@@ -133,6 +134,7 @@ export const Game = (props) => {
                 <FinalScore score={score}/>
                 <PlayAgain onClick={restartGame}/>
                 <SignOut/>
+                <GoToLeaderboard/>
                 </div>
                );
         }

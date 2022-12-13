@@ -60,6 +60,23 @@ export const signIn = async(username, password)=>{
                 {username: username,
                  password: password})
         });
+        return response;
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+export const getAll = async()=>{
+    const endpoint = "http://localhost:8080/allWithoutPasswords";
+    try{
+        
+        const response = await fetch(endpoint,{
+            credentials: 'include'});
+
+        return response;
+       
+        
     }
     catch(error){
         console.log(error);

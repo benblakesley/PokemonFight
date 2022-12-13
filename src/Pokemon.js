@@ -2,8 +2,6 @@ import React from "react";
 
 export const Pokemon =(props) => {
 
-
-
     return(
                 <div className="container my-5">
                     <div className="row">

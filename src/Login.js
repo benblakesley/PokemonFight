@@ -1,7 +1,7 @@
 import React from "react";
 import { Game } from "./Game";
 import { Link, useNavigate} from "react-router-dom";
-import {checkSessionValid, signIn} from './HelperHttpFunctions';
+import {signIn} from './HelperHttpFunctions';
 import { useState } from "react";
 
 
@@ -21,21 +21,20 @@ const handlePasswordChange = (event)=>{
 
 
 const handleSignIn = async()=>{
-       validCredentials().then(async(response)=>{
-           if(response){
-               //sign in functionality
-               
-               await signIn(username, password);
-               navigate("../Game");
-               
-                   
-           }
-           else{
-               //inform user that credentials are incorrect
-              
-               console.log("invalid credentials");
-           }
-       });
+
+      const credentialsValid = await validCredentials();
+
+      const credentialsValidJson = await credentialsValid.json();
+
+      if(credentialsValidJson){
+        await signIn(username, password);
+        navigate("../Game");
+      }
+      else{
+        console.log("invalid credentials")
+      }
+
+    
     }
 
 
@@ -54,8 +53,7 @@ const validCredentials = async()=>{
             {username: username,
              password: password})
     });
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return response;
     }
     catch(error){
         console.log(error);
